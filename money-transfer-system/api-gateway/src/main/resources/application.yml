@@ -1,0 +1,47 @@
+server:
+  port: 8989
+
+management:
+  endpoint.gateway.enabled: true
+  endpoints.web.exposure.include: gateway
+  
+spring:
+  application:
+    name: API-GATEWAY
+  cloud:
+    gateway:
+      routes:
+      - id: transfer-service-id
+        uri: lb://TRANSFER-SERVICE
+        predicates:
+        - Path=/api/transfer/**
+        filters:
+            - AuthFilter  
+      - id: statement-service-id
+        uri: lb://STATEMENT-SERVICE
+        predicates:
+        - Path=/api/statement/** 
+        filters:
+            - AuthFilter
+      - id: user-service-id
+        uri: lb://USER-SERVICE
+        predicates:
+        - Path=/api/user/** 
+
+
+
+#Eureka
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost
+      
+    
+
+
+
+      
