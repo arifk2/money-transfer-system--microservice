@@ -14,19 +14,19 @@ spring:
       - id: transfer-service-id
         uri: lb://TRANSFER-SERVICE
         predicates:
-        - Path=/api/transfer/**
+        - Path=/api/transfer-service/**
         filters:
             - AuthFilter  
       - id: statement-service-id
         uri: lb://STATEMENT-SERVICE
         predicates:
-        - Path=/api/statement/** 
+        - Path=/api/statement-service/** 
         filters:
             - AuthFilter
       - id: user-service-id
         uri: lb://USER-SERVICE
         predicates:
-        - Path=/api/user/** 
+        - Path=/api/user-service/** 
 
 
 
