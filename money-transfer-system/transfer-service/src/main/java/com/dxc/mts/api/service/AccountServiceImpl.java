@@ -36,9 +36,11 @@ public class AccountServiceImpl implements AccountService {
 	@Override
 	public Account saveAccount(AccountDTO accountDTO)
 			throws NoSuchMessageException, UserNotFoundException, BankNotFoundException {
-		Account existingAccount = getByAccountNumber(accountDTO.getAccountNumber());
-		if (existingAccount != null)
-			return existingAccount;
+		if (accountDTO.getAccountId() != null && accountDTO.getAccountId() != 0) {
+			Account existingAccount = getByAccountNumber(accountDTO.getAccountNumber());
+			if (existingAccount != null)
+				return existingAccount;
+		}
 
 		User user = userService.getUserById(accountDTO.getUserId());
 		Bank bank = bankService.getBankById(accountDTO.getBankId());
@@ -46,10 +48,14 @@ public class AccountServiceImpl implements AccountService {
 		Account account = new Account();
 		account.setAccountNumber(accountDTO.getAccountNumber());
 		account.setAccountType(accountDTO.getAccountType());
-		account.setAvailableBalance(1000.00);
+
+		if (accountDTO.getAvailableBalance() != null && accountDTO.getAvailableBalance() == 0)
+			account.setAvailableBalance(accountDTO.getAvailableBalance());
+		else
+			account.setAvailableBalance(1000.00);
+
 		account.setBank(bank);
 		account.setUser(user);
-
 		return accountRepository.save(account);
 	}
 

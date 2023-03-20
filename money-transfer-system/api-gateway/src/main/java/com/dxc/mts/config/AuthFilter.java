@@ -33,7 +33,7 @@ public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter.Config> 
 				throw new RuntimeException("Incorrect authorization structure");
 			}
 
-			return webClientBuilder.build().post().uri("http://USER-SERVICE/api/user/validateToken?token=" + parts[1])
+			return webClientBuilder.build().post().uri("http://USER-SERVICE/api/user-service/validateToken?token=" + parts[1])
 					.retrieve().bodyToMono(BaseResponse.class).map(userDto -> {
 						exchange.getRequest().mutate().header("X-auth-status", String.valueOf(userDto.getStatus()));
 						return exchange;
