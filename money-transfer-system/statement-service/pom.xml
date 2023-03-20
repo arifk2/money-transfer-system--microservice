@@ -10,10 +10,10 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.dxc.mts</groupId>
-	<artifactId>transfer-service</artifactId>
+	<artifactId>statement-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>transfer-service</name>
-	<description>Transfer Service for Money transfer System</description>
+	<name>statement-service</name>
+	<description>Statement Service for Money transfer System</description>
 	<properties>
 		<java.version>1.8</java.version>
 		<spring-cloud-version>2021.0.6</spring-cloud-version>
