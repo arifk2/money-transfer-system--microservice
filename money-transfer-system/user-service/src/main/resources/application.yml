@@ -1,0 +1,65 @@
+spring:
+  application:
+    name: USER-SERVICE
+  datasource:
+      url: jdbc:mysql://localhost:3306/MONEY_TRANSFER_SYSTEM?createDatabaseIfNotExist=true
+      username: root
+      password: root
+  jpa:
+    database: MYSQL
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+  main:
+    allow-circular-references: true
+      
+
+server:
+  port: 8082
+  servlet:
+    context-path: /api/user-service/
+    
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+        
+# Logging configuration
+logging:
+  level:
+    org:
+      springframework:
+        web: INFO
+      hibernate: ERROR
+    com:
+      dxc: INFO
+  file:
+    name: mtsLogFile.log
+  logback:
+    rollingpolicy:
+      max-file-size: 5MB
+ 
+ 
+# Eureka client configuration
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost
+    
+    
+# Security configuration
+security:
+  jwt:
+    token:
+      secret-key: moneytransfersystem
+
+    
+    

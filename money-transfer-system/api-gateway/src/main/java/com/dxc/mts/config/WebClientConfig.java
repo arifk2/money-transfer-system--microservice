@@ -5,6 +5,7 @@ import java.util.Arrays;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.reactive.CorsWebFilter;
 import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
@@ -15,6 +16,7 @@ public class WebClientConfig {
 
     @Bean
     @LoadBalanced
+    @Lazy
     public WebClient.Builder loadBalancedWebClientBuilder() {
         return WebClient.builder();
     }

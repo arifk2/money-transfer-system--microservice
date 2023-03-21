@@ -17,6 +17,7 @@
 	<modules>
 		<module>api-gateway</module>
 		<module>service-registry</module>
+		<module>mts-cloud-config-server</module>
 		<module>statement-service</module>
 		<module>transfer-service</module>
 		<module>user-service</module>

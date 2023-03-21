@@ -1,5 +1,7 @@
 package com.dxc.mts.config;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.http.HttpHeaders;
@@ -9,9 +11,13 @@ import org.springframework.web.reactive.function.client.WebClient;
 import com.dxc.mts.dto.BaseResponse;
 
 @Component
+@RefreshScope
 public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter.Config> {
 
 	private final WebClient.Builder webClientBuilder;
+	
+	@Value("${microservice.user-service.endpoints.endpoint.uri}")
+	private String ENPOINT_URL;
 
 	public AuthFilter(WebClient.Builder webClientBuilder) {
 		super(Config.class);
@@ -33,7 +39,7 @@ public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter.Config> 
 				throw new RuntimeException("Incorrect authorization structure");
 			}
 
-			return webClientBuilder.build().post().uri("http://USER-SERVICE/api/user-service/validateToken?token=" + parts[1])
+			return webClientBuilder.build().post().uri(ENPOINT_URL + parts[1])
 					.retrieve().bodyToMono(BaseResponse.class).map(userDto -> {
 						exchange.getRequest().mutate().header("X-auth-status", String.valueOf(userDto.getStatus()));
 						return exchange;
