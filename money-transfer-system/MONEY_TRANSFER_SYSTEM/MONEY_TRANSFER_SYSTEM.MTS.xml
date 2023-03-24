@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<database name="MONEY_TRANSFER_SYSTEM" schema="MTS" type="Microsoft SQL Server - 15.00.2000">
+   <tables>
+      <table catalog="MONEY_TRANSFER_SYSTEM" name="ACCOUNT" numRows="0" remarks="" schema="MTS" type="TABLE">
+         <column autoUpdated="true" defaultValue="null" digits="0" id="0" name="ACCOUNT_ID" nullable="false" remarks="" size="8" type="bigint identity" typeCode="-5">
+            <child catalog="MONEY_TRANSFER_SYSTEM" column="FK_ACCOUNT" foreignKey="FKsoufmfhg234fe00ffduel0d94" implied="false" onDeleteCascade="false" schema="MTS" table="TRANSACTIONS"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="ACCOUNT_NUMBER" nullable="true" remarks="" size="8" type="bigint" typeCode="-5"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="ACCOUNT_TYPE" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="AVAILABLE_BALANCE" nullable="true" remarks="" size="8" type="float" typeCode="8"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="FK_BANK" nullable="true" remarks="" size="8" type="bigint" typeCode="-5">
+            <parent catalog="MONEY_TRANSFER_SYSTEM" column="BANK_ID" foreignKey="FKsp6mux5951vurfpmroc6e7jko" implied="false" onDeleteCascade="false" schema="MTS" table="BANK"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="FK_USER" nullable="true" remarks="" size="8" type="bigint" typeCode="-5">
+            <parent catalog="MONEY_TRANSFER_SYSTEM" column="USER_ID" foreignKey="FKpinj3gaadu9vt1pbx7p3wud7d" implied="false" onDeleteCascade="false" schema="MTS" table="USERS"/>
+         </column>
+         <primaryKey column="ACCOUNT_ID" sequenceNumberInPK="1"/>
+         <index name="PK__ACCOUNT__05B22F60128BECE0" unique="true">
+            <column ascending="true" name="ACCOUNT_ID"/>
+         </index>
+      </table>
+      <table catalog="MONEY_TRANSFER_SYSTEM" name="ADDRESS" numRows="0" remarks="" schema="MTS" type="TABLE">
+         <column autoUpdated="true" defaultValue="null" digits="0" id="0" name="ADDRESS_ID" nullable="false" remarks="" size="8" type="bigint identity" typeCode="-5"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="ADDRESS_LINE1" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="ADDRESS_LINE2" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="CITY" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="COUNTRY" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="PINCODE" nullable="true" remarks="" size="8" type="bigint" typeCode="-5"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="6" name="FK_BANK" nullable="true" remarks="" size="8" type="bigint" typeCode="-5">
+            <parent catalog="MONEY_TRANSFER_SYSTEM" column="BANK_ID" foreignKey="FKe0956w6g1lms89mx2fw3wppvw" implied="false" onDeleteCascade="false" schema="MTS" table="BANK"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="7" name="FK_USER" nullable="true" remarks="" size="8" type="bigint" typeCode="-5">
+            <parent catalog="MONEY_TRANSFER_SYSTEM" column="USER_ID" foreignKey="FK1pfjp60ay0rsh4ni8xn60o0lt" implied="false" onDeleteCascade="false" schema="MTS" table="USERS"/>
+         </column>
+         <primaryKey column="ADDRESS_ID" sequenceNumberInPK="1"/>
+         <index name="PK__ADDRESS__66EDEA2F32206A00" unique="true">
+            <column ascending="true" name="ADDRESS_ID"/>
+         </index>
+      </table>
+      <table catalog="MONEY_TRANSFER_SYSTEM" name="BANK" numRows="0" remarks="" schema="MTS" type="TABLE">
+         <column autoUpdated="true" defaultValue="null" digits="0" id="0" name="BANK_ID" nullable="false" remarks="" size="8" type="bigint identity" typeCode="-5">
+            <child catalog="MONEY_TRANSFER_SYSTEM" column="FK_BANK" foreignKey="FKsp6mux5951vurfpmroc6e7jko" implied="false" onDeleteCascade="false" schema="MTS" table="ACCOUNT"/>
+            <child catalog="MONEY_TRANSFER_SYSTEM" column="FK_BANK" foreignKey="FKe0956w6g1lms89mx2fw3wppvw" implied="false" onDeleteCascade="false" schema="MTS" table="ADDRESS"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="BANK_NAME" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="BRANCH" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="IFSC_CODE" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <primaryKey column="BANK_ID" sequenceNumberInPK="1"/>
+         <index name="PK__BANK__06D33C4632FBA6EB" unique="true">
+            <column ascending="true" name="BANK_ID"/>
+         </index>
+      </table>
+      <table catalog="MONEY_TRANSFER_SYSTEM" name="EVENT_LOG" numRows="0" remarks="" schema="MTS" type="TABLE">
+         <column autoUpdated="true" defaultValue="null" digits="0" id="0" name="EVENT_ID" nullable="false" remarks="" size="8" type="bigint identity" typeCode="-5"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="ACTIVITY" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="7" id="2" name="ACTIVITY_TIMESTAMP" nullable="true" remarks="" size="16" type="datetime2" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="7" id="3" name="CURRENT_TIMESTAMPS" nullable="true" remarks="" size="16" type="datetime2" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="FK_USER" nullable="true" remarks="" size="8" type="bigint" typeCode="-5">
+            <parent catalog="MONEY_TRANSFER_SYSTEM" column="USER_ID" foreignKey="FK9ukimhdwy4i4ljar3kehq2tst" implied="false" onDeleteCascade="false" schema="MTS" table="USERS"/>
+         </column>
+         <primaryKey column="EVENT_ID" sequenceNumberInPK="1"/>
+         <index name="PK__EVENT_LO__241A510C1AC19E79" unique="true">
+            <column ascending="true" name="EVENT_ID"/>
+         </index>
+      </table>
+      <table catalog="MONEY_TRANSFER_SYSTEM" name="TRANSACTIONS" numRows="0" remarks="" schema="MTS" type="TABLE">
+         <column autoUpdated="true" defaultValue="null" digits="0" id="0" name="TX_ID" nullable="false" remarks="" size="8" type="bigint identity" typeCode="-5"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="CLOSING_BALANCE" nullable="true" remarks="" size="8" type="float" typeCode="8"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="COMMENTS" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="OPENING_BALANCE" nullable="true" remarks="" size="8" type="float" typeCode="8"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="TX_AMOUNT" nullable="true" remarks="" size="8" type="float" typeCode="8"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="TX_DATE" nullable="true" remarks="" size="6" type="date" typeCode="91"/>
+         <column autoUpdated="false" defaultValue="null" digits="7" id="6" name="TX_TIMESTAMP" nullable="true" remarks="" size="16" type="datetime2" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="7" name="TX_TYPE" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="8" name="TRANSFER_TYPE" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="9" name="FK_ACCOUNT" nullable="true" remarks="" size="8" type="bigint" typeCode="-5">
+            <parent catalog="MONEY_TRANSFER_SYSTEM" column="ACCOUNT_ID" foreignKey="FKsoufmfhg234fe00ffduel0d94" implied="false" onDeleteCascade="false" schema="MTS" table="ACCOUNT"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="10" name="FK_USER" nullable="true" remarks="" size="8" type="bigint" typeCode="-5">
+            <parent catalog="MONEY_TRANSFER_SYSTEM" column="USER_ID" foreignKey="FK8li3i6el626y6tqbalsr5o9x" implied="false" onDeleteCascade="false" schema="MTS" table="USERS"/>
+         </column>
+         <primaryKey column="TX_ID" sequenceNumberInPK="1"/>
+         <index name="PK__TRANSACT__B6B1EEC221378532" unique="true">
+            <column ascending="true" name="TX_ID"/>
+         </index>
+      </table>
+      <table catalog="MONEY_TRANSFER_SYSTEM" name="USERS" numRows="0" remarks="" schema="MTS" type="TABLE">
+         <column autoUpdated="true" defaultValue="null" digits="0" id="0" name="USER_ID" nullable="false" remarks="" size="8" type="bigint identity" typeCode="-5">
+            <child catalog="MONEY_TRANSFER_SYSTEM" column="FK_USER" foreignKey="FKpinj3gaadu9vt1pbx7p3wud7d" implied="false" onDeleteCascade="false" schema="MTS" table="ACCOUNT"/>
+            <child catalog="MONEY_TRANSFER_SYSTEM" column="FK_USER" foreignKey="FK1pfjp60ay0rsh4ni8xn60o0lt" implied="false" onDeleteCascade="false" schema="MTS" table="ADDRESS"/>
+            <child catalog="MONEY_TRANSFER_SYSTEM" column="FK_USER" foreignKey="FK9ukimhdwy4i4ljar3kehq2tst" implied="false" onDeleteCascade="false" schema="MTS" table="EVENT_LOG"/>
+            <child catalog="MONEY_TRANSFER_SYSTEM" column="FK_USER" foreignKey="FK8li3i6el626y6tqbalsr5o9x" implied="false" onDeleteCascade="false" schema="MTS" table="TRANSACTIONS"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="EMAIL_ADDRESS" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="PASSWORD" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="PHONE_NUMBER" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="USERNAME" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <primaryKey column="USER_ID" sequenceNumberInPK="1"/>
+         <index name="PK__USERS__F3BEEBFFF71FB2DF" unique="true">
+            <column ascending="true" name="USER_ID"/>
+         </index>
+      </table>
+   </tables>
+</database>
